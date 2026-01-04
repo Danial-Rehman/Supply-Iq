@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyIQ — AI-Powered Inventory Forecasting for E-commerce</title>
+    <meta name="description" content="Stop guessing what to order. SupplyIQ predicts demand and tells you exactly when to restock — so you never lose sales to stockouts or waste money on overstock.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #4f46e5;
+        }
+
+        .nav-cta {
+            background: #4f46e5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #4338ca;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #1a1a2e;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #4f46e5;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+        }
+
+        .hero-cta:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+        }
+
+        .hero-note {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+
+        .problem-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #4f46e5;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .problem h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1a1a2e;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+
+        .problem-card p {
+            color: #64748b;
+        }
+
+        .problem-stat {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ef4444;
+            margin-top: 1rem;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .solution-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.1);
+        }
+
+        .feature-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #eef2ff;
+            color: #4f46e5;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: #64748b;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: #1a1a2e;
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .how-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .how-it-works .section-label {
+            color: #a5b4fc;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #4f46e5;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: #a5b4fc;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 5rem 2rem;
+            background: #f8fafc;
+        }
+
+        .proof-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .testimonial-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #1a1a2e;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #4f46e5;
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4f46e5;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a1a2e;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .pricing-desc {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: #4f46e5;
+            font-weight: 700;
+        }
+
+        .pricing-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .pricing-cta.primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .pricing-cta.primary:hover {
+            background: #4338ca;
+        }
+
+        .pricing-cta.secondary {
+            background: #f1f5f9;
+            color: #1a1a2e;
+        }
+
+        .pricing-cta.secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 5rem 2rem;
+            background: #f8fafc;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #64748b;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .final-cta .hero-cta {
+            background: white;
+            color: #4f46e5;
+        }
+
+        .final-cta .hero-cta:hover {
+            background: #f8fafc;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Email Form */
+        .email-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .email-form input:focus {
+            border-color: #4f46e5;
+        }
+
+        .email-form button {
+            padding: 1rem 2rem;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .email-form button:hover {
+            background: #4338ca;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Supply<span>IQ</span></a>
+            <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">🚀 Coming Soon — Join the Waitlist</div>
+        <h1>Stop Guessing.<br><span>Start Knowing.</span></h1>
+        <p class="hero-subtitle">AI-powered demand forecasting that tells you exactly what to order and when — so you never lose sales to stockouts or waste money on dead inventory.</p>
+        
+        <div id="waitlist">
+            <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Get Early Access</button>
+            </form>
+        </div>
+        <p class="hero-note">Free for early users. No credit card required.</p>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="problem-container">
+            <p class="section-label">The Problem</p>
+            <h2>Inventory management is costing you more than you think</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <h3>Stockouts Kill Sales</h3>
+                    <p>Every "Out of Stock" message is a customer you lose — often forever. They'll just buy from your competitor.</p>
+                    <span class="problem-stat">30% of sales lost</span>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📦</div>
+                    <h3>Overstock Drains Cash</h3>
+                    <p>Money sitting in unsold inventory is money you can't use to grow. Plus storage costs add up fast.</p>
+                    <span class="problem-stat">25% tied up in excess</span>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">🎲</div>
+                    <h3>Guessing Doesn't Scale</h3>
+                    <p>Spreadsheets and gut feelings worked when you had 20 products. With 200+, you're flying blind.</p>
+                    <span class="problem-stat">10+ hours/week wasted</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <p class="section-label">The Solution</p>
+        <h2>Inventory forecasting that actually works</h2>
+        <p class="solution-subtitle">SupplyIQ analyzes your sales patterns, seasonality, and trends to predict demand — then tells you exactly what to do.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">1</div>
+                <h3>Smart Demand Forecasting</h3>
+                <p>Our AI learns your unique sales patterns — daily, weekly, seasonal — and predicts future demand with up to 95% accuracy.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-number">2</div>
+                <h3>Reorder Alerts</h3>
+                <p>Get notified before you run out. We calculate optimal reorder points based on your lead times and sales velocity.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-number">3</div>
+                <h3>Overstock Prevention</h3>
+                <p>See which products are at risk of sitting too long. Make data-driven decisions about promotions and markdowns.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-number">4</div>
+                <h3>Trend Detection</h3>
+                <p>Spot rising and falling products early. Double down on winners, phase out losers before they drain your cash.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-number">5</div>
+                <h3>Shopify Integration</h3>
+                <p>Connect in 60 seconds. We sync your products, sales, and inventory automatically. No data entry required.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-number">6</div>
+                <h3>Weekly Reports</h3>
+                <p>Every Monday, get a clear action plan: what to reorder, what to promote, what to watch. Decision-making made easy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="how-container">
+            <p class="section-label">How It Works</p>
+            <h2>From signup to smarter ordering in 5 minutes</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Store</h3>
+                    <p>Install our Shopify app with one click. We securely sync your product and sales data.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>We Analyze Everything</h3>
+                    <p>Our AI crunches your historical data to understand your unique demand patterns.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Actionable Insights</h3>
+                    <p>Receive weekly forecasts and reorder alerts. Know exactly what to order and when.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Save Time & Money</h3>
+                    <p>Reduce stockouts, cut overstock, and stop wasting hours on spreadsheets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="proof-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Average reduction in stockouts</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-label">Less money tied up in inventory</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">5hrs</div>
+                    <div class="stat-label">Saved per week on planning</div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"I used to spend Sunday nights staring at spreadsheets trying to figure out what to order. Now I just check my SupplyIQ email and I'm done in 10 minutes."</p>
+                <p class="testimonial-author">Sarah M.</p>
+                <p class="testimonial-role">Owner, Handmade Candle Co. (Coming Soon)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <p class="section-label">Simple Pricing</p>
+        <h2>Plans that grow with you</h2>
+        <p class="pricing-subtitle">Start free, upgrade when you need more.</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-name">Starter</div>
+                <div class="pricing-price">$49<span>/month</span></div>
+                <p class="pricing-desc">For small stores getting started</p>
+                <ul class="pricing-features">
+                    <li>Up to 200 SKUs</li>
+                    <li>Weekly demand forecasts</li>
+                    <li>Reorder alerts</li>
+                    <li>Email reports</li>
+                    <li>Shopify integration</li>
+                </ul>
+                <a href="#waitlist" class="pricing-cta secondary">Join Waitlist</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="pricing-name">Growth</div>
+                <div class="pricing-price">$99<span>/month</span></div>
+                <p class="pricing-desc">For growing stores with more products</p>
+                <ul class="pricing-features">
+                    <li>Up to 1,000 SKUs</li>
+                    <li>Daily demand forecasts</li>
+                    <li>Trend detection</li>
+                    <li>Overstock alerts</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="#waitlist" class="pricing-cta primary">Join Waitlist</a>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="pricing-name">Scale</div>
+                <div class="pricing-price">$199<span>/month</span></div>
+                <p class="pricing-desc">For high-volume operations</p>
+                <ul class="pricing-features">
+                    <li>Up to 5,000 SKUs</li>
+                    <li>Real-time forecasts</li>
+                    <li>Multi-location support</li>
+                    <li>API access</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <a href="#waitlist" class="pricing-cta secondary">Join Waitlist</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How accurate are the forecasts?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Our AI typically achieves 85-95% accuracy after learning from 3+ months of your sales data. The more data you have, the more accurate we get. We also show confidence levels so you know which forecasts to trust most.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if I only have a few months of sales data?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    No problem! We can start generating useful forecasts with as little as 8 weeks of data. Our AI combines your data with general e-commerce patterns to make smart predictions even early on.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Does it work with platforms other than Shopify?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We're launching with Shopify first, but WooCommerce and BigCommerce integrations are on our roadmap. Join the waitlist and let us know what platform you use — it helps us prioritize!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How long does setup take?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    About 60 seconds to connect your store. We'll then analyze your historical data overnight, and you'll have your first forecasts within 24 hours.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is my data safe?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. We use bank-level encryption, never share your data with third parties, and you can delete everything at any time. We only access what we need to generate forecasts.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Ready to stop guessing?</h2>
+        <p>Join 100+ store owners already on the waitlist. Be first to try SupplyIQ when we launch.</p>
+        <a href="#waitlist" class="hero-cta">Join the Waitlist →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 SupplyIQ. Made for e-commerce store owners who hate spreadsheets.</p>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                document.querySelectorAll('.faq-question span').forEach(s => s.textContent = '+');
+                
+                // Toggle clicked answer
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    question.querySelector('span').textContent = '−';
+                }
+            });
+        });
+
+        // Initially hide FAQ answers
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+    </script>
+</body>
+</html>
